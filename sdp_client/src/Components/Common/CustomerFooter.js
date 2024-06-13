@@ -14,7 +14,7 @@ function CustomerFooter() {
 
 				<div class="row g-5 mb-5">
 					<div class="col-lg-4">
-						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Digital Marketing Platform</a></div>
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Service Discovery Platform</a></div>
 						<p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
 
 						{/* <ul class="list-unstyled custom-social">
@@ -45,7 +45,7 @@ function CustomerFooter() {
 				<div class="border-top copyright">
 					<div class="row pt-4">
 						<div class="col-lg-6">
-							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed and Distributed with love by <a href="https://logipromptproacademy.com">Logiprompt Pro Academy</a>  
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed and Distributed with love by <a href="https://logipromptproacademy.com" style={{color:"LightPurple"}}>Logiprompt Pro Academy</a>  
             </p>
 						</div>
 

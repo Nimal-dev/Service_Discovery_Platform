@@ -15,7 +15,7 @@ function CustomerNavbar() {
     <>
       <nav className="customer-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
         <div className="container">
-          <a className="navbar-brand" href="index.html">DONATION PLATFORM</a>
+          <a className="navbar-brand" href="index.html">SERVICE DISCOVERY PLATFORM</a>
 
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -32,8 +32,8 @@ function CustomerNavbar() {
               <li className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`}>
                 <a className="nav-link" href="/Services">Services</a>
               </li>
-              <li className={`nav-item ${currentPath === '/MyOrders' ? 'active' : ''}`}>
-						<a class="nav-link" href="/MyOrders">My Bookings</a>
+              <li className={`nav-item ${currentPath === '/MyBookings' ? 'active' : ''}`}>
+						<a class="nav-link" href="/MyBookings">My Bookings</a>
               </li>
               <li className={`nav-item ${currentPath === '/Cart' ? 'active' : ''}`}>
 						<a class="nav-link" href="/Cart"><img src="img/cart.svg"/><strong> Cart</strong></a>

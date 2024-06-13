@@ -12,6 +12,9 @@ import EditProvider from "./Components/Forms/EditProvider";
 import AddService from "./Components/Forms/AddService";
 import EditService from "./Components/Forms/EditService";
 import CustomerHome from "./Components/Home/CustomerHome.jsx";
+import ServicesSection from "./Components/CustomerPageComponents/ServicesSection.jsx";
+import Cart from "./Components/CustomerPageComponents/Cart.js";
+import MyBookings from "./Components/CustomerPageComponents/MyBookings.js";
 
 function App() {
   return (
@@ -61,6 +64,13 @@ function App() {
     
       <Route path="/HelpRequests" element={<HelpRequestList/>} />
       <Route path="/ResourceRequests" element={<ResourceRequestList/>} /> */}
+
+
+
+{/* ----------------Custome Page Routes---------------------------- */}
+<Route path="/Services" element={<ServicesSection/>}/>
+<Route path="/Cart" element={<Cart/>}/>
+<Route path="/MyBookings" element={<MyBookings/>}/>
 
 
 

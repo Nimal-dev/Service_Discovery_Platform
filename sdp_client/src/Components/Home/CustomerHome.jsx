@@ -1,14 +1,17 @@
 import React from 'react'
 import CustomerNavbar from '../Common/CustomerNavbar'
 import CustomerFooter from '../Common/CustomerFooter'
-import ProductSection from '../CustomerPageComponents/ProductSection'
+
 import ChooseUs from '../CustomerPageComponents/ChooseUs'
+import HeroSection from '../CustomerPageComponents/HeroSection'
+import ServiceSection from '../CustomerPageComponents/ServiceSection'
 
 function CustomerHome() {
   return (
     <>
     <CustomerNavbar/>
-    <ProductSection/>
+    <HeroSection/>
+    <ServiceSection/>
     <ChooseUs/>
     <CustomerFooter/>
     </>
