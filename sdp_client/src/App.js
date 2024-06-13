@@ -11,7 +11,7 @@ import AddProvider from "./Components/Forms/AddProvider";
 import EditProvider from "./Components/Forms/EditProvider";
 import AddService from "./Components/Forms/AddService";
 import EditService from "./Components/Forms/EditService";
-import CustomerHome from "./Components/Home/customerHome";
+import CustomerHome from "./Components/Home/CustomerHome.jsx";
 
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
 <Route path="/AdminHome" element={<AdminHome/>}/>
 <Route path="/ServiceProviderHome" element={<ProviderHome/>}/>
 <Route path="/CustomerHome" element={<CustomerHome/>}/>
+{/* <Route path="/CustomerHome" element={<CustomerHome/>}/> */}
       {/* 
       <Route path="/StateHome" element={<StateHome/>}/>
       />

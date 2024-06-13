@@ -53,7 +53,7 @@ function Sidebar() {
       case 0:
         return "/AdminHome";
       case 1:
-        return "/StateHome";
+        return "/ServiceProviderHome";
       case 2:
         return "/VolunteerHome";
       case 3:
@@ -97,14 +97,7 @@ function Sidebar() {
                 <i className="fa fa-th-list me-2"></i>Add Category
               </NavLink>
 
-              <NavLink
-                exact
-                to="/ResourceRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Resource Requests
-              </NavLink>
+
             </>
           )}
           {usertype === 1 && (
@@ -118,23 +111,7 @@ function Sidebar() {
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
 
-              <NavLink
-                exact
-                to="/HelpRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Help Requests
-              </NavLink>
-
-              <NavLink
-                exact
-                to="/ResourceRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Resource Requests
-              </NavLink>
+            
             </>
           )}
           {usertype === 2 && (
@@ -148,14 +125,7 @@ function Sidebar() {
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
 
-              <NavLink
-                exact
-                to="/HelpRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Help Requests
-              </NavLink>
+              
             </>
           )}
           {usertype === 3 && (
