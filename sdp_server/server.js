@@ -22,6 +22,7 @@ const port = 4000;
 const authRouter = require('./Routes/Router');
 const adminRouter = require('./Routes/adminRouter');
 const providerRouter = require('./Routes/providerRouter');
+const customerRouter = require('./Routes/customerRouter');
 
 db();
 
@@ -29,5 +30,6 @@ app.get('/', (req, res) => { res.send('Loaded'); });
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
 app.use('/provider', providerRouter);
+app.use('/customer', customerRouter);
 
 app.listen(port, () => { console.log('Server Is Running'); });

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate } from 'react-router-dom';
-import CustomerFooter from '../Common/CustomerFooter';
-
+import { useNavigate } from 'react-router-dom';
 
 function CartContents() {
   const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
@@ -17,17 +15,17 @@ function CartContents() {
       .catch(error => console.error('Error fetching cart items:', error));
   }, []);
 
-  const removeItem = (productId) => {
+  const removeItem = (serviceId) => {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
     const customerId = userdata._id;
 
-    fetch(`http://localhost:4000/customer/removeFromCart/${customerId}/${productId}`, {
+    fetch(`http://localhost:4000/customer/removeFromCart/${customerId}/${serviceId}`, {
       method: 'DELETE',
     })
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          setCartItems(prevItems => prevItems.filter(item => item.productId._id !== productId));
+          setCartItems(prevItems => prevItems.filter(item => item.serviceId._id !== serviceId));
         }
       })
       .catch(error => console.error('Error removing item:', error));
@@ -62,106 +60,93 @@ function CartContents() {
       .catch(error => console.error('Error placing order:', error));
   };
 
-
-
- 
-
   return (
-    <>
-      <div className="untree_co-section before-footer-section">
-        <div className="container">
-          <div className="row mb-5">
-            <form className="col-md-12" method="post">
-              <div className="site-blocks-table">
-                {cartItems.length === 0 ? (
+    <div className="untree_co-section before-footer-section">
+      <div className="container">
+        <div className="row mb-5">
+          <form className="col-md-12" method="post">
+            <div className="site-blocks-table">
+              {cartItems.length === 0 ? (
                 <div style={{ textAlign: 'center' }}>
-                <img src="./img/empty-cart.png" alt="Image" className="img-fluid" style={{width:"300px", height:"300px"}} /> 
-                <h2 style={{ color: 'black' }}>No Products in the cart. Add items to cart</h2>
-              </div>
-                ) : (
-                  <table className="tables">
-                    <thead>
-                      <tr>
-                        <th className="product-thumbnail">Image</th>
-                        <th className="product-name">Product</th>
-                        <th className="product-price">Price</th>
-                        <th className="product-remove">Remove</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.map(item => (
-                        <tr key={item.productId._id}>
-                          <td className="product-thumbnail">
-                            <img src={`http://localhost:4000${item.productId.imageUrl}`} alt="Image" className="img-fluid" />
-                          </td>
-                          <td className="product-name">
-                            <h2 className="h5">{item.productId.name}</h2>
-                          </td>
-                          <td>₹{item.productId.price.toFixed(2)}</td>
-                          <td> <button
-                              className="btn btn-danger btn-sm"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                removeItem(item.productId._id);
-                              }}
-                            >
-                              X
-                            </button></td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </div>
-            </form>
-          </div>
-          {cartItems.length > 0 && (
-            <div className="row">
-              <div className="col-md-6">
-                <div className="row mb-5">
-                  <div className="col-md-6">
-                    <a className="btn btn-secondary" href='/CustomerHome'>Continue Shopping</a>
-                  </div>
+                  <img src="./img/empty-cart.png" alt="Image" className="img-fluid" style={{ width: "300px", height: "300px" }} />
+                  <h2 style={{ color: 'black' }}>No Services in the cart. Add Services to cart</h2>
                 </div>
-              </div>
-              <div className="col-md-6 pl-5">
-                <div className="row justify-content-end">
-                  <div className="col-md-7">
-                    <div className="row">
-                      <div className="col-md-12 text-right border-bottom mb-5">
-                        <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
-                      </div>
+              ) : (
+                <table className="tables">
+                  <thead>
+                    <tr>
+                      <th className="product-name">Service</th>
+                      <th className="product-price">Price</th>
+                      <th className="product-remove">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartItems.map(item => (
+                      <tr key={item.serviceId._id}>
+                        <td className="product-name">
+                          <h2 style={{color:"black"}} className="h5">{item.serviceId.servicename}</h2>
+                        </td>
+                        <td>₹{item.serviceId.serviceprice.toFixed(2)}</td>
+                        <td>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              removeItem(item.serviceId._id);
+                            }}
+                          >
+                            X
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </form>
+        </div>
+        {cartItems.length > 0 && (
+          <div className="row">
+            <div className="col-md-6">
+              <div className="row mb-5"></div>
+            </div>
+            <div className="col-md-6 pl-5">
+              <div className="row justify-content-end">
+                <div className="col-md-7">
+                  <div className="row">
+                    <div className="col-md-12 text-right border-bottom mb-5">
+                      <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
                     </div>
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <span className="text-black">Subtotal</span>
-                      </div>
-                      <div className="col-md-6 text-right">
-                        <strong className="text-black">₹{cartItems.reduce((acc, item) => acc + item.productId.price, 0).toFixed(2)}</strong>
-                      </div>
+                  </div>
+                  <div className="row mb-3">
+                    <div className="col-md-6">
+                      <span className="text-black">Subtotal</span>
                     </div>
-                    <div className="row mb-5">
-                      <div className="col-md-6">
-                        <span className="text-black">Total</span>
-                      </div>
-                      <div className="col-md-6 text-right">
-                        <strong className="text-black">₹{cartItems.reduce((acc, item) => acc + item.productId.price, 0).toFixed(2)}</strong>
-                      </div>
+                    <div className="col-md-6 text-right">
+                      <strong className="text-black">₹{cartItems.reduce((acc, item) => acc + item.serviceId.serviceprice, 0).toFixed(2)}</strong>
                     </div>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <button className="btn btn-secondary btn-lg py-3 px-10 mb-5" onClick={proceedToCheckout}>Proceed To Checkout</button>
-                      </div>
+                  </div>
+                  <div className="row mb-5">
+                    <div className="col-md-6">
+                      <span className="text-black">Total</span>
+                    </div>
+                    <div className="col-md-6 text-right">
+                      <strong className="text-black">₹{cartItems.reduce((acc, item) => acc + item.serviceId.serviceprice, 0).toFixed(2)}</strong>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <button className="btn btn-secondary btn-lg py-3 px-10 mb-5" onClick={proceedToCheckout}>Proceed To Checkout</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-      
-    </>
+    </div>
   );
 }
 

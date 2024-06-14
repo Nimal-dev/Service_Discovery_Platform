@@ -20,6 +20,7 @@ const serviceSchema = mongoose.Schema({
 
 const service = mongoose.model("service", serviceSchema);
 
+
 const bookingSchema = mongoose.Schema({
     serviceId: { type: mongoose.Schema.Types.ObjectId, ref: "service", required: true },
     customerId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },

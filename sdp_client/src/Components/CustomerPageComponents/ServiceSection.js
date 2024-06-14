@@ -13,44 +13,28 @@ function ServiceSection() {
   }, []);
   
 
-  // useEffect(() => {
-  //   const fetchServices = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:4000/provider/viewServices");
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch services");
-  //       }
-  //       const data = await response.json();
-  //       setServices(data);
-  //     } catch (error) {
-  //       console.error("Error fetching services:", error);
-  //       setError("Failed to fetch services. Please try again.");
-  //     }
-  //   };
-  //   fetchServices();
-  // }, []);
 
-  // const addToCart = (productId) => {
-  //   const userdata = JSON.parse(localStorage.getItem('userdata'));
-  //   const customerId = userdata._id;
+  const addToCart = (serviceId) => {
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    const customerId = userdata._id;
 
-  //   fetch('http://localhost:4000/customer/AddCart', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ customerId, productId }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.success) {
-  //         alert('Product added to cart successfully');
-  //       } else {
-  //         alert(data.message || 'Error adding product to cart');
-  //       }
-  //     })
-  //     .catch(error => console.error('Error adding product to cart:', error));
-  // };
+    fetch('http://localhost:4000/customer/AddCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ customerId, serviceId }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Product added to cart successfully');
+        } else {
+          alert(data.message || 'Error adding product to cart');
+        }
+      })
+      .catch(error => console.error('Error adding product to cart:', error));
+  };
 
   return (
     <div className="product-section">
@@ -77,7 +61,7 @@ function ServiceSection() {
                 <strong className="product-price">${service.serviceprice.toFixed(2)}</strong>
                 <span className="icon-cross">
                 <button 
-                      // onClick={() => addToCart(service._id)} 
+                      onClick={() => addToCart(service._id)} 
                       className="btn btn-secondary"
                     >
                       <i className="fa fa-cart-plus" aria-hidden="true"></i>

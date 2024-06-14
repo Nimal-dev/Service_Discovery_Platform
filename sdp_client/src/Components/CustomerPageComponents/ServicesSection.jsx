@@ -23,6 +23,29 @@ function ServicesSection() {
     fetchServices();
   }, []);
 
+
+  const addToCart = (serviceId) => {
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    const customerId = userdata._id;
+
+    fetch('http://localhost:4000/customer/AddCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ customerId, serviceId }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Product added to cart successfully');
+        } else {
+          alert(data.message || 'Error adding product to cart');
+        }
+      })
+      .catch(error => console.error('Error adding product to cart:', error));
+  };
+
   return (
     <>
       <CustomerNavbar />
@@ -46,7 +69,12 @@ function ServicesSection() {
                   <strong className="product-price">₹{service.serviceprice}</strong>
                   <span className="icon-cross">
                     {/* <img src="img/cross.svg" className="img-fluid" alt="cross icon" /> */}
-                    <a href="/products" className="btn btn-secondary"><i className="fa fa-cart-plus" aria-hidden="true"></i></a>
+                    <button 
+                      onClick={() => addToCart(service._id)} 
+                      className="btn btn-secondary"
+                    >
+                      <i className="fa fa-cart-plus" aria-hidden="true"></i>
+                    </button>
                   </span>
                 </div>
               </div>
