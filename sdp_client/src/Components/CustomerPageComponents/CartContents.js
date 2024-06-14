@@ -75,14 +75,16 @@ function CartContents() {
                 <table className="tables">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th className="product-name">Service</th>
                       <th className="product-price">Price</th>
                       <th className="product-remove">Remove</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {cartItems.map(item => (
+                    {cartItems.map((item, index) => (
                       <tr key={item.serviceId._id}>
+                        <td>{index + 1}</td>
                         <td className="product-name">
                           <h2 style={{color:"black"}} className="h5">{item.serviceId.servicename}</h2>
                         </td>

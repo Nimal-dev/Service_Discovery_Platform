@@ -528,6 +528,26 @@
     font-size: 0.875em;
     color: #6c757d;
   }
+  .background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img//AbstractWallpaper.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .container-fluids{
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    background: url('../img//AbstractWallpaper.jpg') no-repeat center center;
+   background-size: cover; 
+  }
   .container,
   .container-fluid,
   .container-sm,
@@ -540,6 +560,7 @@
     padding-left: var(--bs-gutter-x, 0.75rem);
     margin-right: auto;
     margin-left: auto;
+    
   }
   @media (min-width: 576px) {
     .container,
