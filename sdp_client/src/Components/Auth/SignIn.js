@@ -88,8 +88,9 @@ function SigninPage() {
                 <div className="form-floating mb-3">
                   <input
                   style={{
+                    
                     backdropFilter:"blur(10px)",
-                    background: "rgba(255, 255, 255, 0.1)",
+                    background: "rgba(0, 0, 0, 0.5)",
                   }}
                     type="email"
                     className="form-control"
@@ -105,7 +106,7 @@ function SigninPage() {
                   <input
                   style={{
                     backdropFilter:"blur(10px)",
-                    background: "rgba(255, 255, 255, 0.1)",
+                    background: "rgba(0, 0, 0, 0.5)",
                   }}
                     type="password"
                     className="form-control"

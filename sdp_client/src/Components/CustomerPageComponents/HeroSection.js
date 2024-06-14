@@ -1,30 +1,55 @@
-import React from 'react'
+import React from 'react';
+import { Carousel } from 'react-bootstrap';
 
 function HeroSection() {
   return (
     <>
-    {/* <!-- Start Hero Section --> */}
-			<div class="hero">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col-lg-5">
-							<div class="intro-excerpt">
-								<h1>Service Discovery <span clsas="d-block">Platform</span></h1>
-								<p class="mb-4">Welcome to our Service Discovery Platform. We Provide a variety of Digital Marketing Services and a space for young Entrepreneurs to Glow up!</p>
-								
-							</div>
-						</div>
-						<div class="col-lg-7">
-							<div class="hero-img-wrap">
-								<img src="img/digital_marketing.png" class="img-fluid"/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		{/* <!-- End Hero Section --> */}
+      {/* <!-- Start Hero Section --> */}
+      
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+					style={{height:"500px"}}
+                    src="img/carousel1.jpg"
+                    alt="First slide"
+                  />
+                  <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>Welcome to our Service Discovery Platform.</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    style={{height:"500px"}}
+                    src="img/carousel2.jpg"
+                    alt="Second slide"
+                  />
+                  <Carousel.Caption>
+                    <h3>Second slide label</h3>
+                    <p>We Provide a variety of Digital Marketing Services.</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    style={{height:"500px"}}
+                    src="img/carousel3.jpg"
+                    alt="Third slide"
+                  />
+                  <Carousel.Caption>
+                    <h3>Third slide label</h3>
+                    <p>A space for young Entrepreneurs to Glow up!</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              </Carousel>
+	
+          
+        
+      {/* <!-- End Hero Section --> */}
     </>
-  )
+  );
 }
 
-export default HeroSection
+export default HeroSection;
