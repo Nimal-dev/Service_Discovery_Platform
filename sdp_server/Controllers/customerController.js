@@ -62,49 +62,48 @@ exports.removeFromCart = async (req, res) => {
 // -----------------Placing Order--------------------------//
 
 exports.placeOrder = async (req, res) => {
-  const { customerId, address } = req.body;
-
-  try {
-    const cart = await Cart.findOne({ userId: customerId }).populate('items.productId');
-    if (!cart || cart.items.length === 0) {
-      return res.status(400).json({ success: false, message: 'Cart is empty' });
+    const { customerId, address } = req.body;
+    try {
+      const cart = await Cart.findOne({ userId: customerId }).populate('items.serviceId');
+      if (!cart) {
+        return res.status(404).json({ success: false, message: 'Cart not found' });
+      }
+  
+      const orderItems = cart.items.map(item => ({
+        serviceId: item.serviceId._id,
+        price: item.serviceId.serviceprice,
+        quantity: 1 // Assuming quantity is always 1 for simplicity
+      }));
+  
+      const total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  
+      const newOrder = new Order({
+        userId: customerId,
+        items: orderItems,
+        total,
+        address
+      });
+  
+      await newOrder.save();
+  
+      // Clear the cart after placing the order
+      await Cart.findOneAndDelete({ userId: customerId });
+  
+      res.status(201).json({ success: true, message: 'Order placed successfully' });
+    } catch (error) {
+      console.error('Error placing order:', error);
+      res.status(500).json({ success: false, message: 'Error placing order' });
     }
-
-    const orderItems = cart.items.map(item => ({
-        serviceId: item.serviceId._id,  // Assuming quantity is always 1
-      price: item.serviceId.price
-    }));
-
-    const total = orderItems.reduce((acc, item) => acc + item.price, 0);
-
-    const newOrder = new Order({
-      userId: customerId,
-      items: orderItems,
-      total,
-      address
-    });
-
-    await newOrder.save();
-
-    // Clear the cart
-    cart.items = [];
-    await cart.save();
-
-    res.json({ success: true, orderId: newOrder._id });
-  } catch (error) {
-    console.error('Error placing order:', error);
-    res.status(500).json({ success: false, message: 'Error placing order' });
-  }
-};
-
-exports.getOrders = async (req, res) => {
-  const { customerId } = req.params;
-
-  try {
-    const orders = await Order.find({ userId: customerId }).populate('items.productId');
-    res.json({ success: true, orders });
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    res.status(500).json({ success: false, message: 'Error fetching orders' });
-  }
-};
+  };
+  
+  // Get orders
+  exports.getOrders = async (req, res) => {
+    const { customerId } = req.params;
+    try {
+      const orders = await Order.find({ userId: customerId }).populate('items.serviceId');
+      res.status(200).json({ success: true, orders });
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ success: false, message: 'Error fetching orders' });
+    }
+  };

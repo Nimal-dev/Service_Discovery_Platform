@@ -35,12 +35,12 @@ function CartContents() {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
     const customerId = userdata._id;
     const address = prompt("Please enter your address");
-
+  
     if (!address) {
       alert("Address is required to proceed to checkout");
       return;
     }
-
+  
     fetch('http://localhost:4000/customer/placeOrder', {
       method: 'POST',
       headers: {
@@ -52,7 +52,7 @@ function CartContents() {
       .then(data => {
         if (data.success) {
           alert('Order placed successfully');
-          navigate('/checkout', { state: { cartItems: [] } });  // Assuming checkout page will display a confirmation message
+          navigate('/myBookings');  // Redirect to My Bookings page after successful order
         } else {
           alert('Error placing order: ' + data.message);
         }

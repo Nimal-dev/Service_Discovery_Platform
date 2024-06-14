@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CustomerNavbar from '../Common/CustomerNavbar';
 import CustomerFooter from '../Common/CustomerFooter';
 
-
 function MyBookings() {
   const [orders, setOrders] = useState([]);
 
@@ -24,8 +23,7 @@ function MyBookings() {
 
   return (
     <>
-      <CustomerNavbar/>
-      {/* -------------Top Bar Start--------------- */}
+      <CustomerNavbar />
       <div
         style={{
           backgroundColor: "#74512D",
@@ -34,14 +32,12 @@ function MyBookings() {
       >
         <h1 style={{ marginLeft: "50px", marginTop: "20px" }}>My Bookings</h1>
       </div>
-      {/* -------------Top Bar End--------------- */}
-      
-        <div className="site-blocks-table">
+      <div className="site-blocks-table">
         {orders.length === 0 ? (
-        <div style={{ textAlign: 'center' }}>
-          <img src="./img/noBookings.png" alt="Image" className="img-fluid" style={{width:"280px", height:"280px", padding:"30px"}} /> 
-          <h2 style={{ color: 'black' }}> You have not booked any Services.</h2>
-        </div>
+          <div style={{ textAlign: 'center' }}>
+            <img src="./img/noBookings.png" alt="Image" className="img-fluid" style={{ width: "280px", height: "280px", padding: "30px" }} />
+            <h2 style={{ color: 'black' }}>You have not booked any Services.</h2>
+          </div>
         ) : (
           <table className="table">
             <thead>
@@ -61,13 +57,8 @@ function MyBookings() {
                   <td>
                     <ul>
                       {order.items.map(item => (
-                        <li key={item.productId._id}>
-                          <img
-                            src={`http://localhost:4000${item.productId.imageUrl}`}
-                            alt="Product"
-                            style={{ width: "50px", height: "50px", marginRight: "10px" }}
-                          />
-                          {item.productId.name} - ₹{item.price.toFixed(2)}
+                        <li key={item.serviceId._id}>
+                          {item.serviceId.servicename} - ₹{item.price.toFixed(2)}
                         </li>
                       ))}
                     </ul>
@@ -77,9 +68,8 @@ function MyBookings() {
             </tbody>
           </table>
         )}
-        
       </div>
-      <CustomerFooter/>
+      <CustomerFooter />
     </>
   );
 }
