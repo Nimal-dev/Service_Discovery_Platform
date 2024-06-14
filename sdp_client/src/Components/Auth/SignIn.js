@@ -4,9 +4,36 @@ import { useNavigate } from 'react-router-dom';
 function SigninPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
   const handleLogin = () => {
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError('Invalid email format');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (password.length < 3) {
+      setPasswordError('Password must be at least 3 characters long');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (!valid) {
+      return;
+    }
+
     let param = {
       email: email,
       password: password,
@@ -32,7 +59,7 @@ function SigninPage() {
             navigate('/ServiceProviderHome');
           } else if (userType === 2) {
             navigate('/CustomerHome');
-          }  else {
+          } else {
             console.log("Unknown user type");
           }
         } else {
@@ -56,16 +83,28 @@ function SigninPage() {
               <h3>Sign In</h3>
             </div>
             <div className="form-floating mb-3">
-              <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
+              <input
+                type="email"
+                className="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label htmlFor="floatingInput">Email address</label>
+              {emailError && <div className="text-danger small mt-1">{emailError}</div>}
             </div>
             <div className="form-floating mb-4">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password"
+              <input
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="floatingPassword">Password</label>
+              {passwordError && <div className="text-danger small mt-1">{passwordError}</div>}
             </div>
             <button type="button" className="btn btn-primary py-3 w-100 mb-4" onClick={handleLogin}>Sign In</button>
             <p className="text-center mb-0">Don't have an Account? <a href="/Signup">Sign Up</a></p><br />
@@ -75,6 +114,6 @@ function SigninPage() {
       </div>
     </div>
   );
-
 }
+
 export default SigninPage;
