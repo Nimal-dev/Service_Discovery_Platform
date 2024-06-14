@@ -3,7 +3,6 @@ const router = express.Router();
 const providerController = require('../Controllers/providerController');
 
 
-router.get('/viewServices', providerController.viewServices);
 router.post('/AddService', providerController.AddService);
 router.post('/deleteService', providerController.deleteService);
 
@@ -12,5 +11,7 @@ router.post('/editAndUpdateService', providerController.editAndUpdateService);
 
 router.post('/BookService', providerController.BookService);
 
+router.get('/viewBookings', providerController.viewBookings);
+router.get('/viewServices', providerController.viewServices);
 
 module.exports = router;
