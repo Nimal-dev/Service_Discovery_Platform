@@ -1,0 +1,4 @@
+# dependencies
+/node_modules
+sdp_client/node_modules/
+sdp_server/node_modules/

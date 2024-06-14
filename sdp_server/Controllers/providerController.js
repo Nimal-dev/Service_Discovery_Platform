@@ -71,13 +71,20 @@ exports.editAndUpdateService = async (req, res) => {
 };
 
 exports.viewBookings = async (req, res) => {
-    try {
-        const bookings = await bookingModel.find().populate('serviceId').populate('customerId');
-        res.status(200).json(bookings);
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to fetch bookings', error });
+    const { customerId } = req.query;
+  
+    if (!customerId) {
+      return res.status(400).json({ success: false, message: 'Customer ID is required' });
     }
-};
+  
+    try {
+      const bookings = await booking.find({ customerId }).populate('serviceId');
+      res.status(200).json(bookings);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+      res.status(500).json({ success: false, message: 'Error fetching bookings' });
+    }
+  };
 
 exports.BookService = async (req, res) => {
     try {

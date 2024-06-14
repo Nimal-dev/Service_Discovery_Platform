@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Common/Navbar";
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
@@ -8,8 +7,12 @@ function BookingList() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
-        const response = await fetch(`http://localhost:4000/provider/viewBookings?customerId=${userId}`);
+        const userdata = JSON.parse(localStorage.getItem("userdata")); // Retrieve userdata from local storage
+        if (!userdata || !userdata._id) {
+          throw new Error("User not logged in");
+        }
+        const customerId = userdata._id;
+        const response = await fetch(`http://localhost:4000/provider/viewBookings?customerId=${customerId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch bookings");
         }
@@ -25,7 +28,6 @@ function BookingList() {
 
   return (
     <>
-      
       <div className="container mt-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2 className="mb-0">Booked Services</h2>
@@ -35,9 +37,9 @@ function BookingList() {
             <div className="col-md-4 mb-4" key={index}>
               <div className="card h-100">
                 <div className="card-body">
-                  <h4 className="card-title">{booking.serviceName}</h4>
-                  <p className="card-text">{booking.serviceDescription}</p>
-                  <p className="card-text"><strong>₹{booking.servicePrice}</strong></p>
+                  <h4 className="card-title">{booking.serviceId.servicename}</h4>
+                  <p className="card-text">{booking.serviceId.servicedescription}</p>
+                  <p className="card-text"><strong>₹{booking.serviceId.serviceprice}</strong></p>
                   <p className="card-text">Booked on: {new Date(booking.bookingDate).toLocaleDateString()}</p>
                 </div>
               </div>
